@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="https://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout">
+
+<head th:replace="~{fragmentos/head :: head}"></head>
+
+<body>
+	<div id="menuSuperior">		
+		<nav th:replace="~{fragmentos/nav :: nav}"></nav>
+	</div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="titulo">
+				<h3>Lista de Clientes</h2>
+			</div>
+			<div th:replace="~{fragmentos/menuLateral :: menuLateral}"></div>
+			<div id="menuCentral" class="col-md-10">
+					<table class="table table-striped" id="tabelaCliente">
+						<thead>
+							<tr>
+								<th scope="col">Id</th>
+								<th scope="col">Cliente</th>
+								<th scope="col">CPF</th>
+								<th scope="col">Telefone</th>
+								<th scope="col">Endereço</th>
+								<th scope="col">Número</th>
+								<th scope="col">Bairro</th>
+								<th scope="col">Cidade</th>
+								<th scope="col">Estado</th>
+								<th scope="col">E-Mail</th>
+								<th scope="col">Ação</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="cliente : ${clientes}">
+								<td th:text="${cliente.id}"></td>
+								<td th:text="${cliente.nome}"></td>
+								<td th:text="${cliente.cpf}"></td>
+								<td th:text="${cliente.telefone}"></td>
+								<td th:text="${cliente.endereco}"></td>
+								<td th:text="${cliente.numero}"></td>
+								<td th:text="${cliente.bairro}"></td>
+								<td th:text="${cliente.cidades.nome}"></td>
+								<td th:text="${cliente.cidades.estados.nome}"></td>
+								<td th:text="${cliente.email}"></td>
+								<td colspan="2">
+									<a th:href="@{/editarCliente/{id}(id=${cliente.id})}"><i
+											id="editar" class="bi bi-pencil-square"></i></a>
+									<a th:href="@{/excluirCliente/{id}(id=${cliente.id})}"><i
+											id="remover" class="bi bi-trash3-fill"></i></a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				<div>
+					<a class="btn btn-primary" th:href="@{/cadastroClientes}" role="button">Cadastrar</a>
+				</div>
+				<br>
+			</div>
+		</div>
+	</div>
+
+	</div>
+	<br>
+	<footer th:replace="~{fragmentos/footer :: footer}"></footer>
+	<script>
+		$(document).ready(function () {
+			$('#tabelaCliente').DataTable();
+		});
+
+		var table = new DataTable('#tabelaCliente', {
+			language: {
+				url: '//cdn.datatables.net/plug-ins/2.0.3/i18n/pt-BR.json',
+			},
+		});
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,90 @@
+#corpo{
+	background-color: rgb(255, 255, 255);
+}
+.opcao {
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+ 
+}
+.opcao:hover{
+	color: rgb(0, 128, 192);
+}
+.bi:hover {
+  color: rgb(0, 128, 192); /* Muda para vermelho ao passar o mouse */
+}
+.titulo {
+  display: flex;            /* Ativa o flexbox */
+  justify-content: center;  /* Centraliza horizontalmente */
+}
+#menuSuperior {
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.7); /* Adiciona uma sombra */
+  padding: 5px; /* Adiciona espaço interno */  
+  margin-bottom: 15px; /* Adiciona espaçamento abaixo */
+  background-color: rgb(0, 128, 192);
+}
+#nav{
+	border-radius: 5px;
+}
+#menuLateral{
+	border-radius: 10px;
+	box-shadow: 3px 3px 3px 3px rgb(0, 0, 0, 0.7);
+}
+#footer{
+	padding: 40px;
+	box-shadow: 3px 3px 3px 3px rgb(0, 0, 0, 0.7);
+}
+#funcionalidade{
+	font-size: 25px;
+	color: rgb(227, 106, 17);
+	padding: 5px;
+}
+#cadastro{
+	font-size: 25px;
+	color: rgb(47, 189, 236);
+	padding: 5px;
+}
+#carrinho{
+	font-size:15px;
+	color: rgb(255, 255, 255);
+	padding-right: 20px;
+}
+#lista{
+	font-size: 25px;
+	color: rgb(255, 40, 40);
+	padding: 5px;
+}
+#editar{
+	color: rgb(0, 166, 0);
+}
+#remover{
+	color: rgb(255, 0, 0);
+}
+#plus{
+	color: rgb(0, 225, 0);
+	font-size: 20px;
+	padding: 5px;
+}
+#list{
+	color: rgb(143, 32, 255);
+	font-size: 20px;
+	padding: 5px;
+}
+#menuCentral{
+	border-radius: 10px;
+	box-shadow: 3px 3px 3px 3px rgb(0, 0, 0, 0.7);
+	background-color: rgb(247, 247, 247);
+}
+#form{
+	border-style: solid;
+	border-width: 1px;
+	border-color: rgb(93, 93, 93);
+	border-radius: 10px;
+	margin-bottom: 5px;
+}
+#list-tabela{
+	border-style: solid;
+	border-width: 1px;
+	border-color: rgb(93, 93, 93);
+	border-radius: 10px;
+	margin-bottom: 5px;
+}

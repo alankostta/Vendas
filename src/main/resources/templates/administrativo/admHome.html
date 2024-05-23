@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head th:replace="~{fragmentos/head :: head}"></head>
+
+<body>
+	<!-- Cabeçalho -->
+	<div id="menuSuperior">
+		<nav th:replace="~{fragmentos/nav :: nav}"></nav>
+	</div>
+
+	<div class="container-fluid">
+		<div class="row">
+			<!-- Menu Lateral -->
+			<div th:replace="~{fragmentos/menuLateral :: menuLateral}"></div>
+
+			<!-- Área Central -->
+			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+				<h2>Área Central</h2>
+				<p>Conteúdo vai aqui...</p>
+			</main>
+		</div>
+	</div>
+
+	<!-- Rodapé -->
+	<br>
+	<footer th:replace="~{fragmentos/footer :: footer}"></footer>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>

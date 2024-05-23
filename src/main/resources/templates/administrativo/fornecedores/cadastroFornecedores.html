@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="https://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout">
+
+<head th:replace="~{fragmentos/head :: head}"></head>
+
+<body>
+	<div id="menuSuperior">		
+		<nav th:replace="~{fragmentos/nav :: nav}"></nav>
+	</div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="titulo">
+				<h3>Cadastro de Fornecedores</h2>
+			</div>
+			<div th:replace="~{fragmentos/menuLateral :: menuLateral}"></div>
+			<div id="menuCentral" class="col">
+				<form th:action="@{/salvarFornecedores}" th:object="${fornecedores}" method="post">
+					<div class="container">
+						<div class="row">
+							<div class="col">
+								<label for="exampleInputEmail1">Id</label>
+								<input type="number" th:field="*{id}" class="form-control" disabled>
+							</div>
+							<div class="col">
+								<label for="exampleInputEmail1">Fornecedor</label>
+								<input type="text" th:field="*{nome}" required class="form-control"
+									aria-describedby="nomelHelp" placeholder="Fornecedor">
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col">
+								<label for="exampleInputPassword1">Cnpj</label>
+								<input type="text" th:field="*{cnpj}" required class="form-control" id="cnpj"
+									placeholder="Cnpj">
+							</div>
+							<div class="col">
+								<label for="exampleInputPassword1">Telefone</label>
+								<input type="text" th:field="*{telefone}" required class="form-control" id="telefone"
+									placeholder="Telefone">
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col">
+								<label for="exampleInputPassword1">E-Mail</label>
+								<input type="text" th:field="*{email}" required class="form-control" id="email"
+									placeholder="E-Mail">
+							</div>
+							<div class="col">
+								<label for="exampleInputPassword1">Bairro</label>
+								<input type="text" th:field="*{bairro}" required class="form-control" id="bairro"
+									placeholder="E-mail">
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col">
+								<label for="exampleInputPassword1">Cidades</label>
+								<select th:field="*{cidades}" class="form-select" 
+									aria-label="Default select example">
+									<option value="" selected>Selecione uma Cidade</option>
+									<option th:each="cidade : ${listaCidades}" th:value="${cidade.id}"
+										th:text="${cidade.nome}"></option>
+								</select>
+							</div>
+							<div class="col">
+								<label for="exampleInputPassword1">Número</label>
+								<input type="text" th:field="*{numero}" required class="form-control" id="numero"
+									placeholder="Numero">
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col">
+								<label for="exampleInputPassword1">Endereço</label>
+								<textarea type="text" th:field="*{endereco}" required class="form-control" id="endereco"
+									placeholder="Endereço"></textarea>
+							</div>
+						</div>
+						<br>
+						<div>
+							<a class="btn btn-primary" href="/listarFornecedores" role="button">Listar</a>
+							<button type="submit" class="btn btn-primary">Enviar</button>
+						</div>
+					</div>
+				</form>
+			</div>
+			</di>
+		</div>
+	</div>
+	<br>
+	<footer th:replace="~{fragmentos/footer :: footer}"></footer>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"
+		integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script>
+		$(document).ready(function () {
+			$('#cnpj').mask('00.000.000/0000-00', {reverse: true});
+			$('#telefone').mask('(00) 0000-0000');
+		});
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="https://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout">
+
+<head th:replace="~{fragmentos/head :: head}"></head>
+
+<body>
+	<div id="menuSuperior">		
+		<nav th:replace="~{fragmentos/nav :: nav}"></nav>
+	</div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="titulo">
+				<h3>Cadastro de Funcionários</h2>
+			</div>
+			<div th:replace="~{fragmentos/menuLateral :: menuLateral}"></div>
+			<div id="menuCentral" class="col">
+				<form action="/salvarFuncionarios" th:object="${funcionarios}" method="post">
+					<div class="container">
+						<div class="form-group">
+							<input type="hidden" th:field="*{id}" class="form-control">
+						</div>
+						<div class="row">
+							<div class="col">
+								<label for="exampleInputEmail1">Funcionario</label>
+								<input type="text" th:field="*{nome}" required class="form-control"
+									aria-describedby="nomelHelp" placeholder="Funcionario">
+							</div>
+							<div class="col">
+								<label for="exampleInputPassword1">Cpf</label>
+								<input type="text" th:field="*{cpf}" required class="form-control" id="cpf"
+									placeholder="Cpf">
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col">
+								<label for="exampleInputPassword1">Telefone</label>
+								<input type="text" th:field="*{telefone}" required class="form-control" id="telefone"
+									placeholder="Telefone">
+							</div>
+							<div class="col">
+								<label for="exampleInputPassword1">Função</label>
+								<input type="text" th:field="*{funcao}" required class="form-control" id="funcao"
+									placeholder="Função">
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col">
+								<label for="exampleInputPassword1">E-Mail</label>
+								<input type="text" th:field="*{email}" required class="form-control" id="email"
+									placeholder="E-Mail">
+							</div>
+							<div class="col">
+								<label for="exampleInputPassword1">Bairro</label>
+								<input type="text" th:field="*{bairro}" required class="form-control" id="bairro"
+									placeholder="E-mail">
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col">
+								<label for="exampleInputPassword1">Cidades</label>
+								<select th:field="*{cidades}" class="form-control">
+									<option th:each="cidade : ${listaCidades}" th:value="${cidade.id}"
+										th:text="${cidade.nome}"></option>
+								</select>
+							</div>
+							<div class="col">
+								
+								<label for="exampleInputPassword1">Número</label>
+								<input type="text" th:field="*{numero}" required class="form-control" id="numero"
+									placeholder="Numero">
+								
+							</div>				
+						</div>
+						<br>
+						<div class="row">
+							<div class="col">
+								<label for="exampleInputPassword1">Endereço</label>
+								<textarea type="text" th:field="*{endereco}" required class="form-control" id="endereco"
+									placeholder="Endereço"></textarea>
+							</div>
+						</div>
+						<br>
+						<div>
+							<a class="btn btn-primary" href="/listarFuncionarios" role="button">Listar</a>
+							<button type="submit" class="btn btn-primary">Enviar</button>
+						</div>
+						<br>
+					</div>
+				</form>
+			</div>
+			</di>
+		</div>
+	</div>
+	<br>
+	<footer th:replace="~{fragmentos/footer :: footer}"></footer>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"
+		integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script>
+		$(document).ready(function () {
+			$('#cpf').mask('000.000.000-00');
+			$('#telefone').mask('(00) 0000-0000');
+		});
+	</script>
+</body>
+
+</html>

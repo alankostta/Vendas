@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="https://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout">
+
+<head th:replace="~{fragmentos/head :: head}"></head>
+
+<body>
+	<div id="menuSuperior">		
+		<nav th:replace="~{fragmentos/nav :: nav}"></nav>
+	</div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="titulo">
+				<h3>Entrada de Produtos</h2>
+			</div>
+			<div th:replace="~{fragmentos/menuLateral :: menuLateral}"></div>
+			<div id="menuCentral" class="col">
+				<form th:action="@{/salvarEntrada}" th:object="${entrada}" method="post">
+					<div class="container-fluid">
+						<br>
+						<div class="row">
+							<div id="form" class="col-md-4">
+								<label for="exampleInputEmail1">Id</label>
+								<input type="number" th:field="*{id}" class="form-control" readonly>
+								<label for="exampleInputEmail1">Observação</label>
+								<input type="text" th:field="*{obs}" class="form-control">
+								<label for="exampleInputPassword1">Funcionario</label>
+								<select th:field="*{funcionarios}" class="form-control">
+									<option value="">Selecione o Funcionário</option>
+									<option th:each="funcionario : ${listaFuncionarios}" th:value="${funcionario.id}"
+										th:text="${funcionario.nome}"></option>
+								</select>
+								<label for="exampleInputPassword1">Fornecedor</label>
+								<select th:field="*{fornecedor}" class="form-control">
+									<option value="">Selecione o Fornecedor</option>
+									<option th:each="fornecedor : ${listaFornecedores}" th:value="${fornecedor.id}"
+										th:text="${fornecedor.nome}"></option>
+								</select>
+								<label for="exampleInputEmail1">Quantidade Total</label>
+								<input type="number"  th:field="*{quantidadeTotal}"
+									class="form-control">
+								<label for="exampleInputEmail1">Valor Total</label>
+								<input type="number"  th:field="*{valorTotal}" class="form-control">
+								<br>
+								<div>
+									<a class="btn btn-primary" th:href="@{/cadastroEntradaClean}"
+										role="button">Limpar</a>
+									<a class="btn btn-primary" th:href="@{/listarEntradas}" role="button">Listar</a>
+									<button type="submit" name="acao" th:value="salvar"
+										class="btn btn-primary">Enviar</button>
+									<button type="button" class="btn btn-primary" data-bs-toggle="modal"
+										data-bs-target="#produtoModal">
+										Produtos
+									</button>
+								</div>
+								<br>
+							</div>
+							<div id="list-tabela" class="col">
+								<!--Tabela com os itens -->
+								<h3>Lista de Produtos</h2>
+								<table class="table table-striped table-hover">
+									<thead>
+										<tr>
+											<th scope="col">Id</th>
+											<th scope="col">Produto</th>
+											<th scope="col">Quantidade</th>
+											<th scope="col">Valor Custo</th>
+											<th scope="col">Valor Venda</th>
+											<th scope="col">Ação</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="itens : ${listaItemEntrada}">
+											<td th:text="${itens.id}"></td>
+											<td th:text="${itens.produtos.nome}"></td>
+											<td th:text="${itens.quantidade}"></td>
+											<td th:text="${itens.valorCusto}"></td>
+											<td th:text="${itens.valor}"></td>
+											<td colspan="2"><a th:href="@{/removerItem/{id}(id=${itens.produtos.id})}"><i
+														class="bi bi-trash3-fill"></i></a>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+				</form>
+			</div>
+			</di>
+		</div>
+	</div>
+	<div class="modal" id="produtoModal" th:object="${itemEntrada}" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="exampleModalLabel">Lista de Produtos</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">Id</th>
+								<th scope="col">Produto</th>
+								<th scope="col">Quantidade</th>
+								<th scope="col">Vr.Custo</th>
+								<th scope="col">Vr.Venda</th>
+								<th scope="col">Ação</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="prod :${listaProdutos}">
+								<td th:text="${prod.id}"></td>
+								<td th:text="${prod.nome}"></td>
+								<td th:text="${prod.estoque}"></td>
+								<td th:text="${prod.precoCusto}"></td>
+								<td th:text="${prod.precoVenda}"></td>
+								<td><a class="btn btn-primary"
+										th:href="@{/addListaIten/{id}(id=${prod.id})}"><i class="bi bi-check2-circle"></i></a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+					<button type="button" class="btn btn-primary">Add no Carrinho</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br>
+	<footer th:replace="~{fragmentos/footer :: footer}"></footer>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"
+		integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+</body>
+
+</html>

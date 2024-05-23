@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="https://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout">
+
+<head th:replace="~{fragmentos/head :: head}"></head>
+
+<body>
+	<div id="menuSuperior">
+		<nav th:replace="~{fragmentos/nav :: nav}"></nav>
+	</div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="titulo">
+				<h3>Lista de Funcionários</h2>
+			</div>
+			<div th:replace="~{fragmentos/menuLateral :: menuLateral}"></div>
+			<div id="menuCentral" class="col-md-10">
+				<table class="table table-striped" id="tabelaFuncionario">
+					<thead>
+						<tr>
+							<th scope="col">Id</th>
+							<th scope="col">Funcionario</th>
+							<th scope="col">CPF</th>
+							<th scope="col">Fone</th>
+							<th scope="col">Endereço</th>
+							<th scope="col">Nº</th>
+							<th scope="col">Bairro</th>
+							<th scope="col">Cidade</th>
+							<th scope="col">Uf</th>
+							<th scope="col">E-Mail</th>
+							<th scope="col">Função</th>
+							<th scope="col">Ação</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="funcionario : ${funcionarios}">
+							<td th:text="${funcionario.id}"></td>
+							<td th:text="${funcionario.nome}"></td>
+							<td th:text="${funcionario.cpf}"></td>
+							<td th:text="${funcionario.telefone}"></td>
+							<td th:text="${funcionario.endereco}"></td>
+							<td th:text="${funcionario.numero}"></td>
+							<td th:text="${funcionario.bairro}"></td>
+							<td th:text="${funcionario.cidades.nome}"></td>
+							<td th:text="${funcionario.cidades.estados.nome}"></td>
+							<td th:text="${funcionario.email}"></td>
+							<td th:text="${funcionario.funcao}"></td>
+							<td colspan="2">
+								<a th:href="@{/editarFuncionario/{id}(id=${funcionario.id})}"><i
+										id="editar" class="bi bi-pencil-square"></i></a>
+								<a th:href="@{/excluirFuncionario/{id}(id=${funcionario.id})}"><i
+										id="remover" class="bi bi-trash3-fill"></i></a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<div>
+					<a class="btn btn-primary" th:href="@{/cadastroFuncionarios}" role="button">Cadastrar</a>
+				</div>
+				<br>
+			</div>
+		</div>
+	</div>
+	</div>
+	<br>
+	<footer th:replace="~{fragmentos/footer :: footer}"></footer>
+	<script>
+		$(document).ready(function () {
+			$('#tabelaFuncionario').DataTable();
+		});
+
+		var table = new DataTable('#tabelaFuncionario', {
+			language: {
+				url: '//cdn.datatables.net/plug-ins/2.0.3/i18n/pt-BR.json',
+			},
+		});
+	</script>
+</body>
+
+</html>

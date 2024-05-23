@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="https://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout">
+
+<head th:replace="~{fragmentos/head :: head}"></head>
+
+<body>
+	<div id="menuSuperior">		
+		<nav th:replace="~{fragmentos/nav :: nav}"></nav>
+	</div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="titulo">
+				<h3>Lista de Cidades</h2>
+			</div>
+			<div th:replace="~{fragmentos/menuLateral :: menuLateral}"></div>
+			<div id="menuCentral" class="col-md-10">
+				<table class="table table-striped" id="tabelaCidades">
+					<thead>
+						<tr>
+							<th scope="col">Id</th>
+							<th scope="col">Cidades</th>
+							<th scope="col">Cep</th>
+							<th scope="col">Estado</th>
+							<th scope="col">Ação</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="cidade : ${cidades}">
+							<td th:text="${cidade.id}"></td>
+							<td th:text="${cidade.nome}"></td>
+							<td th:text="${cidade.cep}"></td>
+							<td th:text="${cidade.estados.sigla}"></td>
+							<td colspan="2">
+								<a th:href="@{/editarCidade/{id}(id=${cidade.id})}"><i
+										id="editar" class="bi bi-pencil-square"></i></a>
+								<a th:href="@{/excluirCidade/{id}(id=${cidade.id})}"><i
+										id="remover" class="bi bi-trash3-fill"></i></a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<div>
+					<a class="btn btn-primary" th:href="@{/cadastroCidades}" role="button">Cadastrar</a>
+				</div>
+				<br>
+			</div>
+		</div>
+	</div>
+	</div>
+	<br>
+	<footer th:replace="~{fragmentos/footer :: footer}"></footer>
+	<script>
+		$(document).ready(function () {
+			$('#tabelaCidades').DataTable();
+		});
+
+		var table = new DataTable('#tabelaCidades', {
+			language: {
+				url: '//cdn.datatables.net/plug-ins/2.0.3/i18n/pt-BR.json',
+			},
+		});
+	</script>
+</body>
+
+</html>
